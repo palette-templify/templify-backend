@@ -1,0 +1,7 @@
+rootProject.name = 'templify'
+
+include 'common'
+include 'auth'
+include 'write'
+include 'transform'
+include 'history'
