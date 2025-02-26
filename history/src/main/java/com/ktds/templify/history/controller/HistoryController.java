@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "히스토리", description = "변환 히스토리 관련 API")
@@ -34,14 +35,14 @@ public class HistoryController {
 
     @Operation(summary = "히스토리 목록 조회", description = "변환 히스토리 목록을 조회합니다.")
     @GetMapping("/list")
-    public ApiResponse<List<HistoryResponse>> getHistoryList() {
-        return ApiResponse.success(historyService.getHistories("userId"));
+    public ApiResponse<List<HistoryResponse>> getHistoryList(@RequestParam("userId") Long userId) {  //TODO: userId를 토큰으로부터 추출하는 것으로 변경
+        return ApiResponse.success(historyService.getHistories(userId));
     }
 
     @Operation(summary = "히스토리 상세 조회", description = "특정 변환 히스토리의 상세 정보를 조회합니다.")
     @GetMapping("/{id}")
     public ApiResponse<HistoryDetailResponse> getHistory(@PathVariable Long id) {
-        return ApiResponse.success(historyService.getHistory(id, "userId"));
+        return ApiResponse.success(historyService.getHistory(id, 1L));
     }
 
 }

@@ -31,7 +31,7 @@ class HistoryServiceTest {
     @DisplayName("사용자의 히스토리 목록을 조회한다")
     void getHistories() {
         // given
-        String userId = "testUser";
+        Long userId = 1L;
         List<History> histories = List.of(new History()); // 테스트용 히스토리 객체 생성
         given(historyRepository.findByUserId(userId)).willReturn(histories);
 
@@ -49,7 +49,7 @@ class HistoryServiceTest {
     void getHistory() {
         // given
         Long historyId = 1L;
-        String userId = "testUser";
+        Long userId = 1L;
         History history = new History(); // 테스트용 히스토리 객체 생성
         given(historyRepository.findByIdAndUserId(historyId, userId))
             .willReturn(Optional.of(history));

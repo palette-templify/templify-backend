@@ -35,21 +35,21 @@ public class HistoryService {
     }
     
     @Transactional(readOnly = true)
-    public List<HistoryResponse> getHistories(String userId) {
+    public List<HistoryResponse> getHistories(Long userId) {
         return historyRepository.findByUserId(userId).stream()
-            .map(history -> new HistoryResponse(
-                history.getId(),
-                history.getRequestId(),
-                history.getOriginalText(),
-                history.getTransformedText(),
-                history.getCreatedBy(),
-                history.getCreatedAt()
-            ))
+            .map(history -> HistoryResponse.builder()
+                .id(history.getId())
+                .requestId(history.getRequestId())
+                .originalText(history.getOriginalText())
+                .transformedText(history.getTransformedText())
+                .createdAt(history.getCreatedAt())
+                .build()
+            )
             .collect(Collectors.toList());
     }
     
     @Transactional(readOnly = true)
-    public HistoryDetailResponse getHistory(Long id, String userId) {
+    public HistoryDetailResponse getHistory(Long id, Long userId) {
         var history = historyRepository.findByIdAndUserId(id, userId)
             .orElseThrow(() -> new IllegalArgumentException("History not found"));
             
