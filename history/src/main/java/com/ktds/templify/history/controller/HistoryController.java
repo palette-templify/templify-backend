@@ -40,9 +40,9 @@ public class HistoryController {
     }
 
     @Operation(summary = "히스토리 상세 조회", description = "특정 변환 히스토리의 상세 정보를 조회합니다.")
-    @GetMapping("/{id}")
-    public ApiResponse<HistoryDetailResponse> getHistory(@PathVariable Long id) {
-        return ApiResponse.success(historyService.getHistory(id, 1L));
+    @GetMapping("/{historyId}")
+    public ApiResponse<HistoryDetailResponse> getHistory(@PathVariable("historyId") Long historyId) {
+        return ApiResponse.success(historyService.getHistory(historyId, 1L));  //TODO: userId를 토큰으로부터 추출하는 것으로 변경
     }
 
 }
