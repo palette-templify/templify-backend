@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public record HistoryRequest (
     String requestId,
-    String userId,
+    Long userId,
     String templateName,
     String originalText,
     String transformedText,

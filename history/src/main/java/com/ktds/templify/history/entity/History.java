@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "history")
+@Table(name = "histories")
 @Getter
 @NoArgsConstructor
 @SuperBuilder
@@ -26,7 +26,7 @@ public class History extends BaseEntity {
     private String requestId;
 
     @Column(nullable = false)
-    private String userId;
+    private Long userId;
 
     @Column(nullable = false)
     private String templateName;
