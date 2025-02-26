@@ -1,15 +1,16 @@
 package com.ktds.templify.history.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
-@Getter
+@Builder
 @AllArgsConstructor
 public class HistoryResponse {
     private Long id;
     private String requestId;
     private String originalText;
-    private LocalDateTime transformedAt;
+    private String transformedText;
     private String status;
+    private LocalDateTime createdAt;
 }

@@ -5,12 +5,12 @@ spring:
   application:
     name: history
   datasource:
-    url: ${POSTGRES_URL}
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/history}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create-drop
     show-sql: true
 
 springdoc:
