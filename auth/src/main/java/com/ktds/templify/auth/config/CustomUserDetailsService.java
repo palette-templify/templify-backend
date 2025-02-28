@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
       log.debug("user logging in: {}", user);
 
       return org.springframework.security.core.userdetails.User.builder()
-              .username(user.getEmail())
+              .username(String.valueOf(user.getId()))
               .password(user.getPassword())
               .roles(String.valueOf(user.getRoles().getFirst()))
               .build();
