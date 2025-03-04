@@ -11,9 +11,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class TransformRequest {
+    private Long userId;
     private Long articleId;
+    private String articleContent;
+    private String templateId;
     private Long modelId;
-    private Long templateId;
 }
 
 
