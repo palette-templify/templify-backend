@@ -8,25 +8,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "transform_requests")
+@Table(name = "transforms")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TransformRequestEntity extends BaseEntity {
+public class Transform extends BaseEntity {
 
     @Id
-    private String requestId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     private Long articleId;
 
     @Column(nullable = false)
-    private String userId;
+    private Long userId;
 
     @Column(nullable = false)
     private String status;
 
     @Column(columnDefinition = "TEXT")
     private String errorMessage;
+
 }
