@@ -118,19 +118,4 @@ public class ChatGptService {
         }
     }
 
-    // 응답 컨텐츠 추출 헬퍼 메서드
-    private String extractResponseContent(String responseBody) {
-        try {
-            JsonNode rootNode = objectMapper.readTree(responseBody);
-            JsonNode choices = rootNode.get("choices");
-
-            if (choices != null && choices.isArray() && choices.size() > 0) {
-                return choices.get(0).get("message").get("content").asText();
-            }
-            return "변환 실패!";
-        } catch (Exception e) {
-            throw new RuntimeException("응답 처리 중 오류 발생: " + e.getMessage(), e);
-        }
-    }
-
 }
