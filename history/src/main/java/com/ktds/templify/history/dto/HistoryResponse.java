@@ -10,7 +10,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class HistoryResponse {
     private Long id;
-    private String requestId;
+    private Long requestId;
     private String originalText;
     private String transformedText;
     private LocalDateTime createdAt;

@@ -23,7 +23,7 @@ public class History extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String requestId;
+    private Long requestId;
 
     @Column(nullable = false)
     private Long userId;
@@ -40,8 +40,6 @@ public class History extends BaseEntity {
     private String modelName;
 
     private Integer tokenCount;
-
-    private Integer processingTime;
 
 }
 

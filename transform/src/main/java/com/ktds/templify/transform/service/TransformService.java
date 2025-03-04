@@ -1,5 +1,8 @@
 package com.ktds.templify.transform.service;
 
+import com.ktds.templify.transform.client.HistoryClient;
+import com.ktds.templify.transform.dto.ChatGptExtractedResponseDto;
+import com.ktds.templify.transform.dto.HistoryRequest;
 import com.ktds.templify.transform.dto.TransformRequest;
 import com.ktds.templify.transform.dto.TransformResponse;
 import com.ktds.templify.transform.entity.Transform;
@@ -13,25 +16,37 @@ public class TransformService {
 
     private final ChatGptService chatGptService;
     private final TransformRequestRepository requestRepository;
+    private final HistoryClient historyClient;
 
     public TransformResponse transform(TransformRequest request) {
-        String transformedContent;
-        transformedContent = chatGptService.transformContent(
+        ChatGptExtractedResponseDto chatGptExtractedResponseDto = chatGptService.transformContent(
             request.getArticleContent(),
-            request.getTemplateId()
+            request.getTemplateContent()
         );
 
-        // history 저장
-
+        // transform 저장
         Transform transform = Transform.builder()
             .articleId(request.getArticleId())
             .userId(request.getUserId())
             .status("SUCCESS")
             .build();
-        requestRepository.save(transform);
+        transform = requestRepository.save(transform);
+
+        // history 저장
+        HistoryRequest historyRequest = HistoryRequest.builder()
+            .requestId(transform.getId())
+            .userId(transform.getUserId())
+            .templateName(request.getTemplateName())
+            .originalText(request.getArticleContent())
+            .transformedText(chatGptExtractedResponseDto.getContent())
+            .modelName(request.getModelName())
+            .tokenCount(chatGptExtractedResponseDto.getTotalTokens())
+            .createdAt(transform.getCreatedAt())
+            .build();
+        historyClient.createHistory(historyRequest);
 
         return TransformResponse.builder()
-            .transformedContent(transformedContent)
+            .transformedContent(chatGptExtractedResponseDto.getContent())
             .build();
     }
 

@@ -22,3 +22,7 @@ chatgpt:
     url: https://api.openai.com/v1
     key: ${OPENAI_API_KEY}
     model: gpt-4
+
+history:
+  api:
+    url: ${HISTORY_URL:localhost:8084}

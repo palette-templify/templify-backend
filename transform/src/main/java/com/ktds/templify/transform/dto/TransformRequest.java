@@ -14,8 +14,10 @@ public class TransformRequest {
     private Long userId;
     private Long articleId;
     private String articleContent;
-    private String templateId;
+    private String templateContent;
+    private String templateName;
     private Long modelId;
+    private String modelName;
 }
 
 

@@ -2,6 +2,8 @@ package com.ktds.templify.transform.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ktds.templify.transform.dto.ChatGptExtractedResponseDto;
+import com.ktds.templify.transform.dto.ChatGptResponseDto;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -62,7 +65,7 @@ public class ChatGptService {
     }
 
     // 📌 GPT-4에게 파일을 기반으로 변환 요청
-    public String transformContent(String originalText, String templateFileId) {
+    public ChatGptExtractedResponseDto transformContent(String originalText, String templateContent) {
         HttpHeaders headers = createHeaders(MediaType.APPLICATION_JSON);
 
         // 요청 본문 구성
@@ -75,27 +78,34 @@ public class ChatGptService {
         // 시스템 메시지
         Map<String, Object> systemMessage = new HashMap<>();
         systemMessage.put("role", "system");
-        systemMessage.put("content", "You are an AI that reformats text according to a given template. A template file id will be given.");
+        systemMessage.put("content", "You are an AI that reformats text according to the following template:\\n\\n"
+            + templateContent);
         messages.add(systemMessage);
 
         // 사용자 메시지
         Map<String, Object> userMessage = new HashMap<>();
         userMessage.put("role", "user");
         userMessage.put("content", originalText);
-        userMessage.put("file_ids", List.of(templateFileId));
         messages.add(userMessage);
 
         requestBody.put("messages", messages);
 
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(
-            OPENAI_URL + "/chat/completions",
-            requestEntity,
-            String.class
+        ResponseEntity<ChatGptResponseDto> response = restTemplate.exchange(
+            OPENAI_URL+"/chat/completions", HttpMethod.POST, requestEntity, ChatGptResponseDto.class
         );
 
-        return extractResponseContent(response.getBody());
+        ChatGptResponseDto responseBody = response.getBody();
+
+        if (responseBody != null) {
+            return new ChatGptExtractedResponseDto(
+                responseBody.getContent(),
+                responseBody.getTotalTokenUsage()
+            );
+        } else {
+            return new ChatGptExtractedResponseDto("", 0);
+        }
     }
 
     // 파일 ID 추출 헬퍼 메서드

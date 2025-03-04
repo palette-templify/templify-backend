@@ -1,4 +1,4 @@
-package com.ktds.templify.history.dto;
+package com.ktds.templify.transform.dto;
 
 import java.time.LocalDateTime;
 import lombok.Builder;

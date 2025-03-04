@@ -27,7 +27,6 @@ public class HistoryService {
             .transformedText(request.transformedText())
             .modelName(request.modelName())
             .tokenCount(request.tokenCount())
-            .processingTime(request.processingTime())
             .createdAt(request.createdAt())
             .build();
 
@@ -61,7 +60,6 @@ public class HistoryService {
             history.getTemplateName(),
             history.getModelName(),
             history.getTokenCount(),
-            history.getProcessingTime(),
             history.getCreatedAt()
         );
     }
