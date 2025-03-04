@@ -4,7 +4,6 @@ import com.ktds.templify.transform.dto.TransformRequest;
 import com.ktds.templify.transform.dto.TransformResponse;
 import com.ktds.templify.transform.entity.Transform;
 import com.ktds.templify.transform.repository.TransformRequestRepository;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

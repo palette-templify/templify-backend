@@ -30,8 +30,7 @@ public class TransformController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<ApiResponse<String>> uploadFile(@RequestParam("file") MultipartFile file)
-        throws IOException, InterruptedException {
+    public ResponseEntity<ApiResponse<String>> uploadFile(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body(
                 ApiResponse.error(400, "파일이 비어있습니다.")
