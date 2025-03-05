@@ -2,6 +2,7 @@ package com.ktds.templify.write.service;
 
 import com.ktds.templify.write.client.TransformClient;
 import com.ktds.templify.write.dto.ArticleResponse;
+import com.ktds.templify.write.dto.TemplateOverviewResponse;
 import com.ktds.templify.write.dto.TemplateRequest;
 import com.ktds.templify.write.dto.TransformRequest;
 import com.ktds.templify.write.dto.TransformResponse;
@@ -11,11 +12,14 @@ import com.ktds.templify.write.entity.Template;
 import com.ktds.templify.write.repository.ArticleRepository;
 import com.ktds.templify.write.repository.TemplateRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class WriteService {
     
@@ -25,7 +29,6 @@ public class WriteService {
 
     private final TransformClient transformClient;
 
-    @Transactional
     public ArticleResponse createArticle(Long userId, WriteRequest request) {
         Template template = templateRepository.findById(request.getTemplateId())
             .orElseThrow(() -> new EntityNotFoundException("Template not found"));
@@ -65,4 +68,13 @@ public class WriteService {
         Template template = Template.from(request);
         templateRepository.save(template);
     }
+
+    public List<TemplateOverviewResponse> getTemplates() {
+        List<Template> templates = templateRepository.findAll();
+
+        return templates.stream()
+            .map(template -> new TemplateOverviewResponse(template.getId(), template.getName()))
+            .collect(Collectors.toList());
+    }
+
 }
