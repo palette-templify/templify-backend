@@ -6,10 +6,9 @@ import lombok.Setter;
 
 @Getter @Setter
 @NoArgsConstructor
-public class ArticleRequest {
+public class WriteRequest {
     private String title;
     private String content;
     private Long templateId;
     private Long modelId;
-    private boolean spellCheck;
 }
