@@ -5,9 +5,9 @@ spring:
   application:
     name: transform
   datasource:
-    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/history}
-    username: ${POSTGRES_USER:green}
-    password: ${POSTGRES_PASSWORD:green}
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/transform}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -16,13 +16,3 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
-
-chatgpt:
-  api:
-    url: https://api.openai.com/v1
-    key: ${OPENAI_API_KEY}
-    model: gpt-4
-
-history:
-  api:
-    url: ${HISTORY_URL:localhost:8084}
