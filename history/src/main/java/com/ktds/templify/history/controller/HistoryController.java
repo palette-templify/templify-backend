@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,14 +36,15 @@ public class HistoryController {
 
     @Operation(summary = "히스토리 목록 조회", description = "변환 히스토리 목록을 조회합니다.")
     @GetMapping("/list")
-    public ApiResponse<List<HistoryResponse>> getHistoryList(@RequestParam("userId") Long userId) {  //TODO: userId를 토큰으로부터 추출하는 것으로 변경
+    public ApiResponse<List<HistoryResponse>> getHistoryList(@RequestHeader("x-user-id") Long userId) {
         return ApiResponse.success(historyService.getHistories(userId));
     }
 
     @Operation(summary = "히스토리 상세 조회", description = "특정 변환 히스토리의 상세 정보를 조회합니다.")
     @GetMapping("/{historyId}")
-    public ApiResponse<HistoryDetailResponse> getHistory(@PathVariable("historyId") Long historyId) {
-        return ApiResponse.success(historyService.getHistory(historyId, 1L));  //TODO: userId를 토큰으로부터 추출하는 것으로 변경
+    public ApiResponse<HistoryDetailResponse> getHistory(
+        @RequestHeader("x-user-id") Long userId, @PathVariable("historyId") Long historyId) {
+        return ApiResponse.success(historyService.getHistory(historyId, userId));
     }
 
 }
