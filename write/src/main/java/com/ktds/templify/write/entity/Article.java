@@ -2,6 +2,8 @@ package com.ktds.templify.write.entity;
 
 import com.ktds.templify.common.entity.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "articles")
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Article extends BaseEntity {
     
     @Id
@@ -16,7 +20,7 @@ public class Article extends BaseEntity {
     private Long id;
     
     @Column(nullable = false)
-    private String userId;
+    private Long userId;
     
     @Column(nullable = false)
     private String title;
@@ -32,5 +36,4 @@ public class Article extends BaseEntity {
     @JoinColumn(name = "model_id")
     private AiModel model;
     
-    private boolean spellCheck;
 }
