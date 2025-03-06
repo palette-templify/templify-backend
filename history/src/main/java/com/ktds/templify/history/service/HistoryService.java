@@ -39,6 +39,7 @@ public class HistoryService {
             .map(history -> HistoryResponse.builder()
                 .id(history.getId())
                 .requestId(history.getRequestId())
+                .templateName(history.getTemplateName())
                 .originalText(history.getOriginalText())
                 .transformedText(history.getTransformedText())
                 .createdAt(history.getCreatedAt())
