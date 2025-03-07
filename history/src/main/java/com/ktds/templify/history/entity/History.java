@@ -1,40 +1,50 @@
 package com.ktds.templify.history.entity;
 
 import com.ktds.templify.common.entity.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "transform_results")
+@Table(name = "histories")
 @Getter
 @NoArgsConstructor
+@SuperBuilder
 public class History extends BaseEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
-    private String requestId;
-    
+    private Long requestId;
+
     @Column(nullable = false)
-    private String userId;
-    
+    private Long userId;
+
+    @Column(nullable = false)
+    private String templateName;
+
+    @Column(nullable = false)
+    private String articleTitle;
+
     @Column(columnDefinition = "TEXT", nullable = false)
     private String originalText;
-    
+
     @Column(columnDefinition = "TEXT", nullable = false)
     private String transformedText;
-    
-    private String templateName;
-    
+
     private String modelName;
-    
+
     private Integer tokenCount;
-    
-    private Integer processingTime;
-    
-    private LocalDateTime transformedAt;
+
 }
+
+
+

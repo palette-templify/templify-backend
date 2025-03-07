@@ -1,6 +1,9 @@
 package com.ktds.templify.write.entity;
 
+import com.ktds.templify.write.dto.TemplateRequest;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "templates")
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Template {
     
     @Id
@@ -18,5 +23,12 @@ public class Template {
     private String name;
     
     @Column(columnDefinition = "TEXT")
-    private String description;
+    private String content;
+
+    public static Template from(TemplateRequest request) {
+        return Template.builder()
+            .name(request.getName())
+            .content(request.getContent())
+            .build();
+    }
 }

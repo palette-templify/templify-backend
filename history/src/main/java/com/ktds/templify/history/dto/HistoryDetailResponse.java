@@ -8,12 +8,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class HistoryDetailResponse {
     private Long id;
-    private String requestId;
+    private Long requestId;
     private String originalText;
     private String transformedText;
     private String templateName;
     private String modelName;
     private Integer tokenCount;
-    private Integer processingTime;
     private LocalDateTime transformedAt;
 }

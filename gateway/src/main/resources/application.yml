@@ -1,0 +1,44 @@
+server:
+  port: 8080  # Port for the gateway
+
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: loc
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+              allowed-origins:
+                - "http://localhost:3000"
+              allowed-methods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+                - OPTIONS
+              allowed-headers:
+                - "*"
+              allow-credentials: true
+      routes:
+        - id: auth-service
+          uri: ${AUTH_SERVICE_URI:http://localhost:8081}
+          predicates:
+            - Path=/api/auth/**
+        - id: write-service
+          uri: ${WRITE_SERVICE_URI:http://localhost:8082}
+          predicates:
+            - Path=/api/write/**
+        - id: history-service
+          uri: ${HISTORY_SERVICE_URI:http://localhost:8084}
+          predicates:
+            - Path=/api/history/**
+        - id: transform-service
+          uri: ${TRANSFORM_SERVICE_URI:http://localhost:8083}
+          predicates:
+            - Path=/api/transform/**
+
+jwt:
+  secret: ${JWT_SECRET}

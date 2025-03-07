@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "refresh_tokens")
+@Table(name = "refresh_tokens", schema = "auth")
 @Getter
 @NoArgsConstructor
 public class RefreshToken {
@@ -16,7 +16,7 @@ public class RefreshToken {
     private Long id;
     
     @Column(nullable = false)
-    private String userId;
+    private Long userId;
     
     @Column(nullable = false)
     private String token;

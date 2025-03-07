@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "user_roles")
+@Table(name = "user_roles", schema = "auth")
 @Getter
 @NoArgsConstructor
 public class UserRole {
@@ -15,7 +15,7 @@ public class UserRole {
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
     
     @Column(nullable = false)
