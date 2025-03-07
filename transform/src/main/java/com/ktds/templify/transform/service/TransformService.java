@@ -37,6 +37,7 @@ public class TransformService {
             .requestId(transform.getId())
             .userId(transform.getUserId())
             .templateName(request.getTemplateName())
+            .articleTitle(request.getArticleTitle())
             .originalText(request.getArticleContent())
             .transformedText(chatGptExtractedResponseDto.getContent())
             .modelName(request.getModelName())

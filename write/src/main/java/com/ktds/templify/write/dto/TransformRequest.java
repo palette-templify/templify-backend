@@ -13,6 +13,7 @@ import lombok.Setter;
 public class TransformRequest {
     private Long userId;
     private Long articleId;
+    private String articleTitle;
     private String articleContent;
     private String templateContent;
     private String templateName;

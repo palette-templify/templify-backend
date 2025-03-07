@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "히스토리", description = "변환 히스토리 관련 API")
@@ -29,7 +28,6 @@ public class HistoryController {
     @Operation(summary = "히스토리 생성(저장)", description = "변환 히스토리를 저장합니다.")
     @PostMapping
     public ApiResponse<Void> createHistory(@RequestBody HistoryRequest request) {
-
         historyService.createHistory(request);
         return ApiResponse.success(null);
     }
