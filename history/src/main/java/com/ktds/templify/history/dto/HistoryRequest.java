@@ -8,6 +8,7 @@ public record HistoryRequest(
     Long requestId,
     Long userId,
     String templateName,
+    String articleTitle,
     String originalText,
     String transformedText,
     String modelName,

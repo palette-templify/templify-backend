@@ -31,6 +31,9 @@ public class History extends BaseEntity {
     @Column(nullable = false)
     private String templateName;
 
+    @Column(nullable = false)
+    private String articleTitle;
+
     @Column(columnDefinition = "TEXT", nullable = false)
     private String originalText;
 

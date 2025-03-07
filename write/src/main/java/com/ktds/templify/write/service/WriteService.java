@@ -49,6 +49,7 @@ public class WriteService {
         TransformRequest transformRequest = TransformRequest.builder()
             .userId(userId)
             .articleId(article.getId())
+            .articleTitle(article.getTitle())
             .articleContent(request.getContent())
             .templateContent(template.getContent())
             .templateName(template.getName())
