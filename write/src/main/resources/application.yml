@@ -7,7 +7,7 @@ spring:
   application:
     name: write
   datasource:
-    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/write}
+    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/write
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   jpa:
