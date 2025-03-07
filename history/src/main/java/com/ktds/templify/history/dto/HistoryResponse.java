@@ -11,6 +11,8 @@ import lombok.Getter;
 public class HistoryResponse {
     private Long id;
     private Long requestId;
+    private String templateName;
+    private String articleTitle;
     private String originalText;
     private String transformedText;
     private LocalDateTime createdAt;
