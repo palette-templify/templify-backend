@@ -75,7 +75,7 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           cd ${{ matrix.module }}
-          docker build -t $DOCKER_USERNAME/${{ env.IMAGE_NAME }}:${{ env.VERSION }} -f Dockerfile .
+          docker build -t $DOCKER_USERNAME/${{ env.IMAGE_NAME }}:${{ env.VERSION }} -f ../Dockerfile .
           docker push $DOCKER_USERNAME/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
 
   update-k8s:
