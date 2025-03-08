@@ -11,30 +11,30 @@ env:
   MODULES: "gateway auth transform history write"
 
 jobs:
-  detect-changes:
-    runs-on: ubuntu-latest
-    outputs:
-      changed_modules: ${{ steps.changed-modules.outputs.modules }}
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Detect Changed Modules
-        id: changed-modules
-        run: |
-          CHANGED_FILES=$(git diff --name-only origin/develop...HEAD)
-          MODULES=""
-          for MODULE in $MODULES; do
-            if echo "$CHANGED_FILES" | grep -q "^$MODULE/"; then
-              MODULES="$MODULES $MODULE"
-            fi
-          done
-          echo "modules=$MODULES" >> $GITHUB_ENV
-          echo "Changed Modules: $MODULES"
+#  detect-changes:
+#    runs-on: ubuntu-latest
+#    outputs:
+#      changed_modules: ${{ steps.changed-modules.outputs.modules }}
+#    steps:
+#      - name: Checkout Repository
+#        uses: actions/checkout@v3
+#
+#      - name: Detect Changed Modules
+#        id: changed-modules
+#        run: |
+#          CHANGED_FILES=$(git diff --name-only origin/develop...HEAD)
+#          MODULES=""
+#          for MODULE in $MODULES; do
+#            if echo "$CHANGED_FILES" | grep -q "^$MODULE/"; then
+#              MODULES="$MODULES $MODULE"
+#            fi
+#          done
+#          echo "modules=$MODULES" >> $GITHUB_ENV
+#          echo "Changed Modules: $MODULES"
 
   build-and-push:
-    needs: detect-changes
-    if: ${{ needs.detect-changes.outputs.changed_modules != '' }}
+#    needs: detect-changes
+#    if: ${{ needs.detect-changes.outputs.changed_modules != '' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
