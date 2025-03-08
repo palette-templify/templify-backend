@@ -22,4 +22,9 @@ public class AuthController {
     public ApiResponse<TokenResponse> login(@RequestBody LoginRequest request) {
         return ApiResponse.success(authService.login(request));
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "Good";
+    }
 }
