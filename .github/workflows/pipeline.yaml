@@ -36,6 +36,8 @@ jobs:
 #    needs: detect-changes
 #    if: ${{ needs.detect-changes.outputs.changed_modules != '' }}
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.gen-version.outputs.VERSION }}
     strategy:
       matrix:
 #        module: ${{ fromJSON(needs.detect-changes.outputs.changed_modules) }}
@@ -83,6 +85,8 @@ jobs:
 
   update-k8s:
     needs: build-and-push
+    env:
+      VERSION: ${{ needs.build-and-push.outputs.version }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Kubernetes manifest repository
