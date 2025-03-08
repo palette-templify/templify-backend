@@ -67,8 +67,7 @@ jobs:
         run: |
           export TZ=Asia/Seoul                
           VERSION=$(date +%Y%m%d%H%M)
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Generated VERSION: $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV 
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Dockerhub login
