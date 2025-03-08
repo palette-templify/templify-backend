@@ -36,9 +36,9 @@ jobs:
 #    needs: detect-changes
 #    if: ${{ needs.detect-changes.outputs.changed_modules != '' }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        module: ${{ fromJSON(needs.detect-changes.outputs.changed_modules) }}
+#    strategy:
+#      matrix:
+#        module: ${{ fromJSON(needs.detect-changes.outputs.changed_modules) }}
     env:
       IMAGE_NAME: templify-${{ matrix.module }}
     steps:
