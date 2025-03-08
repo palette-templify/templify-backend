@@ -58,7 +58,7 @@ jobs:
       - name: Build ${{ matrix.module }}
         run: |
           cd ${{ matrix.module }}
-          ./gradlew clean build
+          gradle clean build
 
       - name: Generate Version Tag
         id: gen-version
