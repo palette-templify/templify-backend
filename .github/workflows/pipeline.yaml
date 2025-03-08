@@ -22,7 +22,7 @@ jobs:
       - name: Detect Changed Modules
         id: changed-modules
         run: |
-          CHANGED_FILES=$(git diff --name-only origin/main...HEAD)
+          CHANGED_FILES=$(git diff --name-only origin/develop...HEAD)
           MODULES=""
           for MODULE in $MODULES; do
             if echo "$CHANGED_FILES" | grep -q "^$MODULE/"; then
