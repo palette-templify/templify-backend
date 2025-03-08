@@ -95,7 +95,8 @@ jobs:
       - name: Update Kubernetes resources
         run: |
 #          for MODULE in ${{ needs.detect-changes.outputs.changed_modules }}; do
-          for MODULE in ["gateway", "auth", "transform", "history", "write"]; do
+            MODULES="gateway auth transform history write"
+            for MODULE in $MODULES; do
             cd $MODULE
             kustomize edit set image $DOCKER_USERNAME/templify-$MODULE:${{ env.VERSION }}
             cat kustomization.yaml
