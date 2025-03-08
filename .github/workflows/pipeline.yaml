@@ -99,7 +99,8 @@ jobs:
               cd $MODULE
               kustomize edit set image $DOCKER_USERNAME/templify-$MODULE:${{ env.VERSION }}
               cat kustomization.yaml
-            cd ..
+              cd ..
+            done
 
       - name: Commit & Push Updated Kustomization Files
         run: |
