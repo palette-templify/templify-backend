@@ -7,7 +7,7 @@ spring:
   application:
     name: history
   datasource:
-    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/history}
+    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/history
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   jpa:
