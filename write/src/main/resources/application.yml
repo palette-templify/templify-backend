@@ -21,4 +21,4 @@ springdoc:
 
 transform:
   api:
-    url: ${TRANSFORM_URL:localhost:8083}
+    url: ${TRANSFORM_URL:localhost}:8083

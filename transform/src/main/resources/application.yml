@@ -27,4 +27,4 @@ chatgpt:
 
 history:
   api:
-    url: ${HISTORY_URL:localhost:8084}
+    url: ${HISTORY_URL:localhost}:8084
