@@ -3,7 +3,7 @@ name: CI/CD for Spring Multi-Module (Templify)
 on:
   push:
     branches:
-      - develop # TODO: 추후 release로 변경
+      - develop
   workflow_dispatch:
 
 env:
