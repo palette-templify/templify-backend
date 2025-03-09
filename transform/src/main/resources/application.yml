@@ -7,7 +7,7 @@ spring:
   application:
     name: transform
   datasource:
-    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/transform}
+    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/transform
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   jpa:
@@ -27,4 +27,4 @@ chatgpt:
 
 history:
   api:
-    url: ${HISTORY_URL:localhost:8084}
+    url: ${HISTORY_URL:localhost}:8084

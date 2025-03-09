@@ -7,7 +7,7 @@ spring:
   application:
     name: auth
   datasource:
-    url: ${POSTGRES_URL}
+    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/auth
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   jpa:
