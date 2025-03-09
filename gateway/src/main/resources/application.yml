@@ -13,6 +13,7 @@ spring:
           '[/**]':
               allowed-origins:
                 - "http://localhost:3000"
+                - "https://templify.211.254.213.33.sslip.io/"
               allowed-methods:
                 - GET
                 - POST
