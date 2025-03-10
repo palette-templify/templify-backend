@@ -7,6 +7,7 @@ import lombok.Builder;
 public record HistoryRequest(
     Long requestId,
     Long userId,
+    Long articleId,
     String templateName,
     String articleTitle,
     String originalText,

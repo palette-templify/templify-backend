@@ -27,6 +27,7 @@ public class KafkaHistoryConsumer {
             .modelName(request.modelName())
             .tokenCount(request.tokenCount())
             .createdAt(request.createdAt())
+            .articleId(request.articleId())
             .build();
 
         historyRepository.save(history);

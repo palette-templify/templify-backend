@@ -29,6 +29,9 @@ public class History extends BaseEntity {
     private Long userId;
 
     @Column(nullable = false)
+    private Long articleId;
+
+    @Column(nullable = false)
     private String templateName;
 
     @Column(nullable = false)

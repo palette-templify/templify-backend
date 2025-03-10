@@ -50,6 +50,7 @@ public class WriteService {
         kafkaProducerService.sendMessage("write-topic", transformRequest);
 
         return ArticleResponse.builder()
+            .id(article.getId())
             .title(request.getTitle())
             .originalContent(request.getContent())
             .templateName(template.getName())

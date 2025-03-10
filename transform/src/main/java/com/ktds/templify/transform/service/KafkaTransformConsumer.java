@@ -44,6 +44,7 @@ public class KafkaTransformConsumer {
             .modelName(request.getModelName())
             .tokenCount(chatGptExtractedResponseDto.getTotalTokens())
             .createdAt(transform.getCreatedAt())
+            .articleId(request.getArticleId())
             .build();
 
         kafkaProducerService.sendMessage("transform-topic", historyRequest);
