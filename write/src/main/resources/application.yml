@@ -10,6 +10,11 @@ spring:
     url: jdbc:postgresql://${POSTGRES_URL:localhost:5432}/write
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 10
+      idle-timeout: 30000
+      max-lifetime: 600000
   jpa:
     hibernate:
       ddl-auto: update
