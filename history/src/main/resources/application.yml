@@ -20,7 +20,7 @@ spring:
       ddl-auto: update
     show-sql: true
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER_URL}
+    bootstrap-servers: 211.254.213.33:9092
     consumer:
       group-id: history-group
       auto-offset-reset: earliest
