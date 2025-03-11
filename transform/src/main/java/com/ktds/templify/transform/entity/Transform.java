@@ -31,4 +31,7 @@ public class Transform extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String errorMessage;
 
+    public void updateStatus(String status) {
+        this.status = status;
+    }
 }

@@ -29,6 +29,7 @@ public class HistoryService {
             .modelName(request.modelName())
             .tokenCount(request.tokenCount())
             .createdAt(request.createdAt())
+            .articleId(request.articleId())
             .build();
 
         historyRepository.save(history);
@@ -44,6 +45,7 @@ public class HistoryService {
                 .articleTitle(history.getArticleTitle())
                 .originalText(history.getOriginalText())
                 .transformedText(history.getTransformedText())
+                .tokenCount(history.getTokenCount())
                 .createdAt(history.getCreatedAt())
                 .build()
             )
@@ -55,6 +57,23 @@ public class HistoryService {
         var history = historyRepository.findByIdAndUserId(id, userId)
             .orElseThrow(() -> new IllegalArgumentException("History not found"));
             
+        return new HistoryDetailResponse(
+            history.getId(),
+            history.getRequestId(),
+            history.getOriginalText(),
+            history.getTransformedText(),
+            history.getTemplateName(),
+            history.getModelName(),
+            history.getTokenCount(),
+            history.getCreatedAt()
+        );
+    }
+
+    public HistoryDetailResponse getHistoryWithArticleId(Long articleId, Long userId) {
+        var history = historyRepository.findByArticleIdAndUserId(articleId, userId).orElseGet(() -> History.builder()
+            .tokenCount(-1)
+            .build());
+
         return new HistoryDetailResponse(
             history.getId(),
             history.getRequestId(),

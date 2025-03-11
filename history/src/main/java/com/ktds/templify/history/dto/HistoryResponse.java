@@ -15,5 +15,6 @@ public class HistoryResponse {
     private String articleTitle;
     private String originalText;
     private String transformedText;
+    private Integer tokenCount;
     private LocalDateTime createdAt;
 }

@@ -43,6 +43,7 @@ public class TransformService {
             .modelName(request.getModelName())
             .tokenCount(chatGptExtractedResponseDto.getTotalTokens())
             .createdAt(transform.getCreatedAt())
+            .articleId(request.getArticleId())
             .build();
         historyClient.createHistory(historyRequest);
 

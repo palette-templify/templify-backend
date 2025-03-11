@@ -29,6 +29,9 @@ public class History extends BaseEntity {
     private Long userId;
 
     @Column(nullable = false)
+    private Long articleId;
+
+    @Column(nullable = false)
     private String templateName;
 
     @Column(nullable = false)
@@ -44,6 +47,10 @@ public class History extends BaseEntity {
 
     private Integer tokenCount;
 
+    public void updateTransformedData(String transformedText, Integer tokenCount) {
+        this.transformedText = transformedText;
+        this.tokenCount = tokenCount;
+    }
 }
 
 
