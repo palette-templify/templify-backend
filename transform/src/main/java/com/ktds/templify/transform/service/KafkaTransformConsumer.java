@@ -9,6 +9,7 @@ import com.ktds.templify.transform.repository.TransformRequestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -19,20 +20,22 @@ public class KafkaTransformConsumer {
     private final TransformRequestRepository transformRequestRepository;
     private final KafkaProducerService kafkaProducerService;
 
-    @Transactional
+
     @KafkaListener(topics = "write-topic", groupId = "transform-group")
     public void processTransformRequest(TransformRequest request) {
+        Transform transform = initiateTransform(request);
+
         ChatGptExtractedResponseDto chatGptExtractedResponseDto = chatGptService.transformContent(
             request.getArticleContent(),
             request.getTemplateContent()
         );
 
-        Transform transform = Transform.builder()
-            .articleId(request.getArticleId())
-            .userId(request.getUserId())
-            .status("SUCCESS")
-            .build();
-        transformRequestRepository.save(transform);
+        if (chatGptExtractedResponseDto.getTotalTokens() != 0) {
+            updateTransformStatus(transform, "SUCCESS");
+        } else {
+            updateTransformStatus(transform, "FAILED");
+        }
+
 
         HistoryRequest historyRequest = HistoryRequest.builder()
             .requestId(transform.getId())
@@ -48,5 +51,21 @@ public class KafkaTransformConsumer {
             .build();
 
         kafkaProducerService.sendMessage("transform-topic", historyRequest);
+    }
+
+    public Transform initiateTransform(TransformRequest request) {
+        Transform transform = Transform.builder()
+            .articleId(request.getArticleId())
+            .userId(request.getUserId())
+            .status("TRANSFORMING")
+            .build();
+        transformRequestRepository.save(transform);
+
+        return transform;
+    }
+
+    public void updateTransformStatus(Transform transform, String status) {
+        transform.updateStatus(status);
+        transformRequestRepository.save(transform);
     }
 }
