@@ -9,5 +9,5 @@ public interface HistoryRepository extends JpaRepository<History, Long> {
     List<History> findByUserId(Long userId);
     Optional<History> findByIdAndUserId(Long id, Long userId);
     Optional<History> findByArticleId(Long articleId);
-
+    Optional<History> findByArticleIdAndUserId(Long articleId, Long userId);
 }
