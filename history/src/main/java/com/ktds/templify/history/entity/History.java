@@ -47,6 +47,10 @@ public class History extends BaseEntity {
 
     private Integer tokenCount;
 
+    public void updateTransformedData(String transformedText, Integer tokenCount) {
+        this.transformedText = transformedText;
+        this.tokenCount = tokenCount;
+    }
 }
 
 

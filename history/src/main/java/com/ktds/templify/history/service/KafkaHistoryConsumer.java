@@ -17,19 +17,26 @@ public class KafkaHistoryConsumer {
     @Transactional
     @KafkaListener(topics = "transform-topic", groupId = "history-group")
     public void processHistoryRequest(HistoryRequest request) {
-        History history = History.builder()
-            .requestId(request.requestId())
-            .userId(request.userId())
-            .templateName(request.templateName())
-            .articleTitle(request.articleTitle())
-            .originalText(request.originalText())
-            .transformedText(request.transformedText())
-            .modelName(request.modelName())
-            .tokenCount(request.tokenCount())
-            .createdAt(request.createdAt())
-            .articleId(request.articleId())
-            .build();
+        History history = historyRepository.findByArticleId(request.articleId())
+            .orElseGet(() -> {
+                History newHistory = History.builder()
+                    .requestId(request.requestId())
+                    .userId(request.userId())
+                    .templateName(request.templateName())
+                    .articleTitle(request.articleTitle())
+                    .originalText(request.originalText())
+                    .transformedText(request.transformedText())
+                    .modelName(request.modelName())
+                    .tokenCount(request.tokenCount())
+                    .createdAt(request.createdAt())
+                    .articleId(request.articleId())
+                    .build();
+                return historyRepository.save(newHistory);
+            });
 
-        historyRepository.save(history);
+        if (request.tokenCount() != -1) {
+            history.updateTransformedData(request.transformedText(), request.tokenCount());
+            historyRepository.save(history);
+        }
     }
 }
