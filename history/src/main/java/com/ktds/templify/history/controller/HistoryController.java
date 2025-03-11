@@ -45,4 +45,10 @@ public class HistoryController {
         return ApiResponse.success(historyService.getHistory(historyId, userId));
     }
 
+    @Operation(summary = "articleId를 통한 히스토리 상세 조회", description = "articleId에 해당하는 글에 대한 변환 히스토리의 상세 정보를 조회합니다.")
+    @GetMapping("/article/{articleId}")
+    public ApiResponse<HistoryDetailResponse> getHistoryWithArticleId(
+        @RequestHeader("x-user-id") Long userId, @PathVariable("articleId") Long articleId) {
+        return ApiResponse.success(historyService.getHistoryWithArticleId(articleId, userId));
+    }
 }
